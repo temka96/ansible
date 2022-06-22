@@ -1,0 +1,27 @@
+---
+- name: setting servers
+  hosts: ubuntu_18
+  become: yes
+  become_user: root
+  gather_facts: no
+  vars: 
+    USER: test
+
+  tasks:
+    - name: create user
+      user:
+        name: "{{ USER }}"
+        shell: /bin/bash
+
+    - name: limit user
+      file:
+        dest: "/etc/sudoers.d/{{ USER }}"
+        state: touch
+        owner: root
+        mode: 0644
+   
+    - name: add line in file
+      lineinfile: 
+        dest: "/etc/sudoers.d/{{ USER }}"
+        line: "{{ USER }} ALL=(root) NOPASSWD: /bin/systemctl"
+        

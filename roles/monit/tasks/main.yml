@@ -1,0 +1,21 @@
+---
+# tasks file for monit
+
+- name: Install monit
+  apt:
+    name: monit
+    state: latest
+
+- name: open port
+  lineinfile:
+    dest: /etc/monit/monitrc
+    regexp: '#    set httpd port 2812 and'
+    line: 'set httpd port 2812 and'
+
+- name: replase pass
+  lineinfile:
+    dest: /etc/monit/monitrc
+    regexp: '#    allow admin:monit'
+    line: 'allow admin:qwerty'
+  notify: 
+    - restart monit

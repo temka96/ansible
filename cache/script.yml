@@ -1,0 +1,36 @@
+---
+- name: setting servers
+  hosts: ubuntu_18
+  become: yes
+  become_user: root
+  gather_facts: no
+
+  tasks:
+    - name: update
+      apt:
+        update_cache: yes
+
+    - name: install nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: start nginx
+      systemd: 
+        name: nginx 
+        state: started 
+        enabled: yes
+
+    - name: setting nginx
+      copy:
+        src: /etc/nginx/sites-available/default
+        dest: /etc/nginx/sites-available/default.backup
+        remote_src: yes
+
+    - name: replace nginx default
+      template:
+        src: /home/artem/git_project/ansible/roles/nginx/templates/default
+        dest: /etc/nginx/sites-available/default
+
+
+

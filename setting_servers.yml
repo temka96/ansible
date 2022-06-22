@@ -1,0 +1,14 @@
+---
+- name: setting servers
+  hosts: ubuntu_18
+  become: yes
+  become_user: root
+  gather_facts: no
+
+  roles:
+    - { role: timezone }
+    - { role: locale }
+    - { role: ssh }
+    - { role: add_user }
+    - { role: nginx }
+    - { role: monit }

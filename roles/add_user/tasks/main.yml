@@ -1,0 +1,19 @@
+---
+# tasks file for add_user
+
+- name: create user
+  user:
+    name: "{{ USER }}"
+    shell: /bin/bash
+
+- name: limit user
+  file:
+    dest: "/etc/sudoers.d/{{ USER }}"
+    state: touch
+    owner: root
+    mode: 0600
+
+- name: add line in file
+  lineinfile: 
+    dest: "/etc/sudoers.d/{{ USER }}"
+    line: "{{ USER }} ALL=(root) NOPASSWD: /bin/systemctl"

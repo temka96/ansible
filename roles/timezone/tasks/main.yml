@@ -1,0 +1,15 @@
+---
+# tasks file for timezone
+
+- name: set timezone to Europe/Moscow
+  timezone:
+    name: Europe/Moscow
+
+- name: Update Timezone Europe/Moscow
+  copy: 
+    content: "Europe/Moscow" 
+    dest: /etc/timezone 
+    owner: root 
+    group: root 
+    mode: 0644
+  register: timezone

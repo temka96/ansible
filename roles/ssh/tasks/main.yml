@@ -1,0 +1,16 @@
+---
+# tasks file for ssh
+
+- name: replase ssh port 
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '#Port 22'
+    line: 'Port {{ PORT }}'
+
+- name: closed root in host  
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '#PermitRootLogin prohibit-password'
+    line: 'PermitRootLogin no'
+  notify:
+    - restart ssh

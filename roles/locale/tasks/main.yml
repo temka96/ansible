@@ -1,0 +1,10 @@
+---
+# tasks file for locale
+
+- name: setting locale
+  locale_gen:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - en_US.UTF-8
+    - ru_RU.UTF-8
