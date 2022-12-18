@@ -1,0 +1,10 @@
+---
+- name: Install MYSQL
+  hosts: mysql
+  connection: ssh
+  become: yes
+  vars_files:
+    - roles/geerlingguy.mysql/vars/main.yml
+
+  roles:
+    - { role: geerlingguy.mysql }

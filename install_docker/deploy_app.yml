@@ -1,0 +1,8 @@
+---
+- name: Install Application
+  hosts: mysql 
+  connection: ssh
+
+  roles:
+    - { role: deployment_application }
+      

@@ -1,0 +1,22 @@
+---
+- name: ping my servers
+  hosts: all
+  connection: ssh
+  become: yes 
+
+  #vars_files:
+  #- secret 
+
+  tasks:
+   - name: debug
+     debug: var=ansible_os_family
+  
+   - name: Update apt cache
+     apt:
+      update_cache: yes
+     when: ansible_os_family == "Debian"
+
+   - name: Update apt cache
+     yum:
+      update_cache: yes
+     when: ansible_os_family == "RedHat"

@@ -1,0 +1,12 @@
+---
+- name: COPY
+  hosts: runner 
+  connection: ssh
+  become: yes
+
+  tasks:
+
+  - name: COPY
+    copy:
+      src: /home/artem/python
+      dest: /home/artem
